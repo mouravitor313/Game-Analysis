@@ -29,7 +29,3 @@ def export_csv_with_addition_information(message_received_from_model):
 
     else:
         dataframe.to_csv('data/games_data_output', mode='a', header=False, index=False)
-
-,
-
-
