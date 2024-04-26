@@ -6,16 +6,14 @@ import os
 API_KEY = os.getenv("API_KEY_OPENAI_MONKEY_BRANCH")
 openai.api_key = API_KEY
 
-dataframe = pd.read_csv('data/games_list.csv')
-
-def add_columns_and_complete_information(prompt,data):
+def add_columns_and_complete_information(prompt,data) -> str:
 
     completions = openai.chat.completions.create(
-        model="gpt-3.5-turbo-1106",
+        model="gpt-3.5-turbo",
         response_format={ "type": "json_object" },
         messages=[
             {"role": "system", "content": "You are a helpful assistant which have the same personality as Mario from Super Mario Bros. and are designed to output JSON."},
-            {"role": "user", "content": prompt+"\n\n"+data}
+            {"role": "user", "content": prompt+"\n\n"+data.to_string()}
         ],
         temperature=0.3,
     )
