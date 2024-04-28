@@ -1,2 +1,3 @@
-prompts = {'complete_that_csv':"""I'm sending you this csv, and with it I need you to give me back another csv adding columns that I send you below and completing the information of the games already present in the csv that I sent you. The columns looked like this (I'm including the columns that are already in csv, to show you in what order the new columns should go in): name,genre,publisher,year,platform,estimate_time,completed,current_time
-           now the csv:"""}
+from typing import Dict
+
+prompts: Dict[str, str]= {'complete_that_csv':"""Based on the CSV provided, add and populate the following columns: name, genre, publisher, year, platform, estimate_time(just a int value in hours), completed, current_time(just a int value in hours). The new columns should maintain the same order. Return only one string with the new rows from the updated CSV and not more."""}

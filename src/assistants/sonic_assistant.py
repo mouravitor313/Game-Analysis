@@ -5,9 +5,9 @@ import os
 API_KEY = os.getenv("API_KEY_OPENAI_MONKEY_BRANCH")
 openai.api_key = API_KEY
 
-def collect_information_and_analyze(prompt):
+def collect_information_and_analyze(prompt: str) -> str:
 
-    data=pd.read_csv('data/games_data_output')
+    data = pd.read_csv('data/games_data_output')
     completions = openai.chat.completions.create(
         model="gpt-3.5-turbo-1106",
         response_format={ "type": "json_object" },
