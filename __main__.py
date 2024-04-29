@@ -1,5 +1,5 @@
 import pandas as pd
-from src.assistants import mario_assistant, sonic_assistant
+from src.assistants.mario_assistant import Mario
 from src.prompts.mario_prompts import prompts
 
 class Main():
@@ -13,9 +13,9 @@ class Main():
     @classmethod
     def main(cls) -> None:
 
-        message_received_from_model = '\n' + mario_assistant.add_columns_and_complete_information(prompts['complete_that_csv'], cls.dataframe)
+        message_received_from_model = Mario.add_columns_and_complete_information(prompts['complete_that_csv'], cls.dataframe)
 
-        mario_assistant.export_csv_with_addition_information(message_received_from_model, 'Game-Analisys/data/games_data_output.csv')
+        Mario.export_csv_with_addition_information('\n' + message_received_from_model, 'Game-Analisys/data/games_data_output.csv')
 
 if __name__ == '__main__':
     Main.main()
