@@ -4,7 +4,7 @@ import io
 import os
 
 class Mario():
-    API_KEY = os.getenv("API_KEY_OPENAI_MONKEY_BRANCH")
+    API_KEY = os.getenv("API_KEY_OPENAI")
     openai.api_key = API_KEY
 
     @staticmethod

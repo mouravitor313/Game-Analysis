@@ -2,7 +2,7 @@ import openai
 import pandas as pd
 import os
 
-API_KEY = os.getenv("API_KEY_OPENAI_MONKEY_BRANCH")
+API_KEY = os.getenv("API_KEY_OPENAI")
 openai.api_key = API_KEY
 
 def collect_information_and_analyze(prompt: str) -> str:
