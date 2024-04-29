@@ -1,3 +1,3 @@
 from typing import Dict
 
-prompts: Dict[str, str]= {'complete_that_csv':"""Based on the CSV provided, add and populate the following columns: name, genre, publisher, year, platform, estimate_time(just a int value in hours), completed, current_time(just a int value in hours). The new columns should maintain the same order. Return only one string with the new rows from the updated CSV and not more."""}
+prompts: Dict[str, str]= {'complete_that_csv':"""Based on the CSV provided, add and populate the following columns in that same order: name, genre, publisher, year, platform, estimate_time(just a int value in hours), completed, current_time(just a int value in hours). The new columns should maintain the same order. Return only one string with the new rows from the updated CSV and not more."""}
