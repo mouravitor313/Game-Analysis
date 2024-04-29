@@ -7,7 +7,7 @@ Este projeto é uma plataforma que ajuda os usuários a gerenciar seu hobby de j
 O programa é dividido entre dois assistentes, o Mario e o Sonic:
 
 - **Mario**: Coleta as informações fornecidas pelo usuário, trata-as, complementa-as com mais informações e envia esses dados para um arquivo.
-- **Sonic**: Analisa os dados coletados pelo Mario e fornece insights sobre esses dados. O Sonic também está disponível para responder perguntas do usuário com base nesses dados.
+- **Sonic**: Analisa os dados coletados pelo Mario e fornece insights sobre esses dados. O Sonic em breve estará disponível para responder perguntas do usuário com base nesses dados.
 
 ## Tecnologias Utilizadas
 
