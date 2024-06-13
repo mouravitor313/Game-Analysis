@@ -15,7 +15,7 @@ class User(Base):
         return check_password_hash(self.password_hash, password)
 
 class Games(Base):
-    __tablename__ = 'choices'
+    __tablename__ = 'games'
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, index=True)
     genre = Column(String)
