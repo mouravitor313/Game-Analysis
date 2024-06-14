@@ -12,7 +12,7 @@ class Mario():
 
         completions = openai.chat.completions.create(
             model="gpt-3.5-turbo-1106",
-            #response_format={ "type": "json_object" },
+            # response_format={ "type": "json_object" },
             messages=[
                 {"role": "system", "content": "You are a helpful assistant which do not says nothing, only give what are user asking"},
                 {"role": "user", "content": prompt+"\n\n"+data}
