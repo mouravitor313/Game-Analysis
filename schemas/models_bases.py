@@ -6,8 +6,9 @@ class UserBase(BaseModel):
 
 class GameBase(BaseModel):
     name: str
-    genre: str
+    platform: str
     completed: bool
+    complete_time: int
     user_id: int
 
 class TokenBase(BaseModel):
