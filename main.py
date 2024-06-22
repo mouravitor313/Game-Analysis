@@ -1,12 +1,10 @@
 import pandas as pd
-from src.assistants.mario_assistant import Mario
-from src.prompts.mario_prompts import prompts_mario
-from src.assistants.sonic_assistant import Sonic
-from src.prompts.sonic_prompts import prompts_sonic
+from assistent.sonic_assistant import Sonic
+from assistent.sonic_prompts import prompts_sonic
 from fastapi import FastAPI, HTTPException, Depends
 from typing import List, Annotated
 import models
-from database import engine, SessionLocal, get_db
+from database import engine, get_db
 from sqlalchemy.orm import Session
 from routes import user_routes, games_routes
 from config import settings
