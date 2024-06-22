@@ -15,12 +15,13 @@ async def insert_game(game: GameBase, db: db_depedency, Authorize: AuthJWT = Dep
         raise HTTPException(status_code=401, detail="Not authenticated!")
         
     new_game = Game(
-        name=game.name,
-        genre=game.genre,
-        completed=game.completed,
-        user_id=current_user.id
+        name = game.name,
+        platform = game.platform,
+        completed = game.completed,
+        complete_time = game.complete_time,
+        user_id = current_user.id
     )
-    
+     
     db.add(new_game)
     db.commit()
     return {"message": "Game inserted!"}

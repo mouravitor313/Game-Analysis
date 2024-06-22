@@ -1,4 +1,3 @@
-from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from database import Base
 from passlib.context import CryptContext
@@ -21,6 +20,7 @@ class Game(Base):
     __tablename__ = 'games'
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, index=True)
-    genre = Column(String)
+    platform = Column(String)
     completed = Column(Boolean, default=False)
+    complete_time = Column(Integer)
     user_id = Column(Integer, ForeignKey("users.id"))
