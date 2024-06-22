@@ -2,4 +2,3 @@ game_analisys/
 env/
 .vscode/
 __pycache__/
-config.py
