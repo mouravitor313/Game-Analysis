@@ -2,9 +2,7 @@
 
 ## Sobre o Projeto
 
-Este projeto é uma plataforma que ajuda os usuários a gerenciar seu hobby de jogar videogame, fornecendo análises e insights sobre os jogos que eles estão jogando. Utilizamos a API da OpenAI para realizar uma análise baseada nos dados dos jogos que o usuário joga e/ou já jogou.
-
-Está API recebe os dados do usuário e dos games jogados para utilizar a API do ChatGPT para criar o assistente Sonic que irá responder ao usuário suas dúvidas a respeito desses jogos, fazer recomendações e gerar insights. 
+Este projeto é uma plataforma que ajuda os usuários a gerenciar seu hobby de jogar videogame,utilizando a API da OpenAI e o FastAPI para fornecer análises e insights sobre os jogos que eles estão jogando.  
 
 ## Tecnologias Utilizadas
 
