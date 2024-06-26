@@ -11,6 +11,9 @@ class GameBase(BaseModel):
     complete_time: int
     user_id: int
 
+class ChatRequest(BaseModel):
+    message: str
+
 class TokenBase(BaseModel):
     acess_token: str
     token_type: str
