@@ -9,29 +9,26 @@ import openai
 import pandas as pd
 import os
 
-# get my api key and give this value to openai.api_key
 API_KEY = os.getenv("API_KEY_OPENAI")
 openai.api_key = API_KEY
 
-# open and read the archive with prompt
-with open('./prompt.txt', 'r') as content:
+with open('routes/prompt.txt', 'r') as content:
     prompt = content.read()
 
 chat_sessions = {}
 
-def chat_with_sonic(user_id, user_message, games: GameBase):
-    # list to stores messages
+def chat_with_sonic(user_id, user_message, games):
     if user_id not in chat_sessions:
         chat_sessions[user_id]=[
-                {"role": "system", "content": prompt + '\n\n' + games}
+                {"role": "system", "content": f"{prompt}\n\n{games}"}
             ]
     
-    chat_sessions[user_id].append({{"role": "user", "content": user_message}})
-        
+    chat_sessions[user_id].append({"role": "user", "content": user_message})
+    print(chat_sessions[user_id])    
     completions = openai.chat.completions.create(
         model="gpt-3.5-turbo-1106",
         messages=chat_sessions[user_id],
-        temperature=0.5,
+        temperature=0.8,
     )
 
     message_received_from_model = completions.choices[0].message.content
@@ -42,10 +39,10 @@ def chat_with_sonic(user_id, user_message, games: GameBase):
 router = APIRouter()
 
 @router.post("/sonic-chat")
-def chat_with_sonic_route(chat_request: ChatRequest, db: db_depedency, Authorize: AuthJWT = Depends()):
+async def chat_with_sonic_route(chat_request: ChatRequest, db: db_depedency, Authorize: AuthJWT = Depends()):
 
-    games = get_game(db, Authorize)
     current_user = get_current_user(db, Authorize)
+    games = get_game(current_user.id, db, Authorize)
 
     if current_user is None:
         raise HTTPException(status_code=401, detail="Not authenticated!")
