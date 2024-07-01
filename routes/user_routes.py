@@ -1,8 +1,10 @@
 from fastapi import APIRouter, HTTPException, Depends
+from fastapi.responses import JSONResponse
+from fastapi_jwt_auth import AuthJWT
 from models import User
 from database import db_depedency
 from schemas.models_bases import UserBase, TokenBase
-from fastapi_jwt_auth import AuthJWT
+
 
 router = APIRouter()
 
@@ -27,7 +29,7 @@ async def register(user: UserBase, db: db_depedency):
 
     return {"message": "User created"}
 
-@router.post("/login", response_model=TokenBase)
+@router.post("/login")
 async def login(user: UserBase, db: db_depedency, Authorize: AuthJWT = Depends()):
     user_query = db.query(User).filter(User.username == user.username).first()
 
@@ -36,24 +38,34 @@ async def login(user: UserBase, db: db_depedency, Authorize: AuthJWT = Depends()
     
     access_token = Authorize.create_access_token(subject=user.username)
     refresh_token = Authorize.create_refresh_token(subject=user.username)
-    user_query.refresh_token = refresh_token
-    
-    db.commit()
 
-    return {"access_token": access_token, "refresh_token": refresh_token, "token_type": "bearer"}
+    Authorize.set_access_cookies(access_token)
+    Authorize.set_refresh_cookies(refresh_token)
 
-@router.post("/refresh", response_model=TokenBase)
-async def refresh(Authorize: AuthJWT = Depends(), db: db_depedency = Depends()):
+    return {"message": "Successfully login"}
+
+@router.post("/refresh")
+async def refresh(db: db_depedency, Authorize: AuthJWT = Depends()):
     try:
         Authorize.jwt_refresh_token_required()
     except Exception as e:
         raise HTTPException(status_code=401, detail="Refresh token is invalid")
 
-    current_user = Authorize.get_jwt_subject()
-    user_query = db.query(User).filter(User.username == current_user).first()
+    current_user = get_current_user(db, Authorize)
 
-    if not user_query or user_query.refresh_token != Authorize._token:
+    if not current_user:
         raise HTTPException(status_code=401, detail="Invalid refresh token")
 
     new_access_token = Authorize.create_access_token(subject=current_user)
-    return {"access_token": new_access_token, "refresh_token": Authorize._token, "token_type": "bearer"}
+    Authorize.set_access_cookies(new_access_token)
+    return {"message": "The token has been refresh"}
+
+@router.delete("/logout")
+async def logout(Authorize: AuthJWT = Depends()):
+    try:
+        Authorize.jwt_required()
+    except Exception as e:
+        raise HTTPException(status_code=401, detail="Token is invalid")
+    
+    Authorize.unset_jwt_cookies()
+    return {"msg": "Successfully logout"}
