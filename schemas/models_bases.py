@@ -3,6 +3,8 @@ from pydantic import BaseModel
 class UserBase(BaseModel):
     username: str
     password: str
+    is_active: str
+    role: str
 
 class GameBase(BaseModel):
     name: str

@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float
 from database import Base
 from passlib.context import CryptContext
 
@@ -9,6 +9,8 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     username = Column(String, unique=True, index=True)
     password_hash = Column(String)
+    is_active = Column(Boolean)
+    role = Column(String)
 
     def set_password(self, password):
         self.password_hash = pwd_context.hash(password)
@@ -22,5 +24,5 @@ class Game(Base):
     name = Column(String, index=True)
     platform = Column(String)
     completed = Column(Boolean, default=False)
-    complete_time = Column(Integer)
+    complete_time = Column(Float)
     user_id = Column(Integer, ForeignKey("users.id"))

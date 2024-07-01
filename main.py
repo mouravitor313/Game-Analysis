@@ -12,4 +12,4 @@ db_depedency = Annotated[Session, Depends(get_db)]
 
 app.include_router(user_routes.router, prefix="/users", tags=["users"])
 app.include_router(games_routes.router, prefix="/games", tags=["games"])
-app.include_router(games_routes.router, prefix="/chat", tags=["chat"])
+app.include_router(sonic_routes.router, prefix="/chat", tags=["chat"])
