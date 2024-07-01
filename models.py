@@ -8,6 +8,7 @@ class User(Base):
     __tablename__ = 'users'
     id = Column(Integer, primary_key=True, index=True)
     username = Column(String, unique=True, index=True)
+    rule = Column(String, index=True)
     password_hash = Column(String)
     is_active = Column(Boolean)
     role = Column(String)
@@ -24,5 +25,15 @@ class Game(Base):
     name = Column(String, index=True)
     platform = Column(String)
     completed = Column(Boolean, default=False)
-    complete_time = Column(Float)
+    complete_time = Column(Float, default=0.0)
     user_id = Column(Integer, ForeignKey("users.id"))
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "platform": self.platform,
+            "completed": self.completed,
+            "complete_time": self.complete_time,
+            "user_id": self.user_id
+        }
